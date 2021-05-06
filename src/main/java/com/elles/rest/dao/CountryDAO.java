@@ -48,7 +48,7 @@ public class CountryDAO {
     private static final String REGION_WHERE_CLAUSE =
             " AND c.region = :region ";
     private static final String PAGINATION_CLAUSE = " ORDER BY c.code "
-            + "  LIMIT :offset , :size ";
+            + "  LIMIT :offset OFFSET :size ";
 
     private static final String CODE_SEARCH = "AND c.code = :code";
 
@@ -58,8 +58,8 @@ public class CountryDAO {
             pageNo = Integer.parseInt(params.get("pageNo").toString());
         }
         Integer offset = (pageNo - 1) * PAGE_SIZE;
-        params.put("offset", offset);
-        params.put("size", PAGE_SIZE);
+        params.put("offset", PAGE_SIZE);
+        params.put("size", offset);
         return namedParamJdbcTemplate.query(SELECT_CLAUSE
                         + " WHERE 1 = 1 "
                         + (!StringUtils.isEmpty((String)params.get("search")) ? SEARCH_WHERE_CLAUSE : "")
