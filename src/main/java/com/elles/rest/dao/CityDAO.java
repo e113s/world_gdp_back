@@ -32,15 +32,15 @@ public class CityDAO {
         params.put("code", countryCode);
         if ( pageNo != null ) {
             Integer offset = (pageNo - 1) * PAGE_SIZE;
-            params.put("offset", offset);
-            params.put("size", PAGE_SIZE);
+            params.put("offset", PAGE_SIZE);
+            params.put("size", offset);
         }
 
         return namedParamJdbcTemplate.query("SELECT "
                         + " id, name, countrycode country_code, district, population "
                         + " FROM city WHERE countrycode = :code"
                         + " ORDER BY Population DESC"
-                        + ((pageNo != null) ? " LIMIT :offset , :size " : ""),
+                        + ((pageNo != null) ? " LIMIT :offset OFFSET :size " : ""),
                 params, new CityMapper());
     }
 
