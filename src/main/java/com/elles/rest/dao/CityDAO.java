@@ -64,7 +64,8 @@ public class CityDAO {
                         + " district, population) "
                         + " VALUES (:name, :country_code, "
                         + " :district, :population )",
-                paramSource, keyHolder);
+                paramSource, keyHolder, new String[] {"id"});
+        System.out.println("KeyHolder Value: " + keyHolder.getKey().longValue());
         return keyHolder.getKey().longValue();
     }
 
