@@ -38,7 +38,7 @@ public class CountryLanguageDAO {
         namedParamJdbcTemplate.update("INSERT INTO countrylanguage ( "
                         + " countrycode, language, isofficial, percentage ) "
                         + " VALUES ( :country_code, :language, "
-                        + " :is_official, :percentage ) ",
+                        + " :is_official::official, :percentage ) ",
                 getAsMap(countryCode, cl));
     }
 
