@@ -44,7 +44,7 @@ public class CountryDAO {
             + "	LIKE CONCAT('%', LOWER(:search), '%') ) ";
 
     private static final String CONTINENT_WHERE_CLAUSE =
-            " AND c.continent = :continent ";
+            " AND c.continent::text = :continent::text ";
     private static final String REGION_WHERE_CLAUSE =
             " AND c.region = :region ";
     private static final String PAGINATION_CLAUSE = " ORDER BY c.code "
@@ -93,7 +93,7 @@ public class CountryDAO {
                         + " name = :name, "
                         + " localname = :localName, "
                         + " capital = :capital, "
-                        + " continent = :continent, "
+                        + " continent = :continent::continents, "
                         + " region = :region, "
                         + " HeadOfState = :headOfState, "
                         + " GovernmentForm = :governmentForm, "
